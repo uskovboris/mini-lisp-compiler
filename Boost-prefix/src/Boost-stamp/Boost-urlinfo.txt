@@ -1,3 +1,0 @@
-repository='external project URL'
-module='https://downloads.sourceforge.net/project/boost/boost/1.61/boost_1_61.zip'
-tag=''
