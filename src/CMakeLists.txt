@@ -1,0 +1,11 @@
+set(SOURCE
+   ${SOURCE}
+   ${CMAKE_CURRENT_SOURCE_DIR}/lexer.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/minilisp.cpp
+   PARENT_SCOPE
+)
+set(HEADERS
+   ${HEADERS}
+   ${CMAKE_CURRENT_SOURCE_DIR}/lexer.h
+   PARENT_SCOPE
+)
