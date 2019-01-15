@@ -1,8 +1,14 @@
 #ifndef LEXER_H
 #define LEXER_H
 
-#include <map>
-#include <string.h>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <algorithm>
+
+#include <boost/algorithm/string/predicate.hpp>
+
+#include "options.h"
 
 namespace minilisp 
 {
@@ -11,11 +17,11 @@ class lexer
 {
 public:
 
-    void tokinize_file(const wchar_t *content) 
+    void tokinize_file(const TCHAR *content) 
     {
         if (content)
         {
-            wchar_t *currentPtr=tokinize_letter(content);
+            TCHAR *currentPtr=tokinize_letter(content);
 
             while (currentPtr)
             {
@@ -26,29 +32,34 @@ public:
 
 private:
 
-    wchar_t *tokinize_letter(const wchar_t *character)
-    {
+    TCHAR *tokinize_letter(const TCHAR *character)
+    {        
         //TODO Use strtok function
-        wchar_t *innerPtr = character;
-        if (std::equal_to<wchar_t>(L'(', *innerPtr))
+        auto innerPtr = const_cast<TCHAR * >(character);
+        
+        if (!boost::equals(_T('('), *character))
         {
-            ++innerPtr;
+            
+        //     ++innerPtr;
 
-            if (std::equal_to(L' ', *innerPtr))
-            {
-                m_error_messages.push_back(L"error: "); //TODO
-                return nullptr_t;
-            }
+        //     if (std::equal_to<TCHAR>(_T(' '), *innerPtr))
+        //     {
+        //         m_error_messages.push_back(_T("error: ")); //TODO
+        //         return nullptr;
+        //     }
 
-            while (std::not_equal_to(' ', *innerPtr))
-            {
-                ++innerPtr;
-            }
+        //     while (std::not_equal_to<TCHAR>(_T(' '), *innerPtr))
+        //     {
+        //         ++innerPtr;
+        //     }
+            
         }
+        
+       return nullptr;
     }
 
-    std::map<std::wstring> m_tokens;
-    std::map<std::wstring> m_error_messages;
+    std::vector<std::basic_string<TCHAR> > m_tokens;
+    std::vector<std::basic_string<TCHAR> > m_error_messages;
 
 }; /* class lexer  */
 
