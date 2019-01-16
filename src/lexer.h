@@ -6,8 +6,6 @@
 #include <cstring>
 #include <algorithm>
 
-#include <boost/algorithm/string/predicate.hpp>
-
 #include "options.h"
 
 namespace minilisp 
@@ -37,7 +35,7 @@ private:
         //TODO Use strtok function
         auto innerPtr = const_cast<TCHAR * >(character);
         
-        if (!boost::equals(_T('('), *character))
+        if (!_T("(") == *character)
         {
             
         //     ++innerPtr;
