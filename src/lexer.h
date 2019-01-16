@@ -36,21 +36,19 @@ private:
         auto innerPtr = const_cast<TCHAR * >(character);
         
         if (!_T("(") == *character)
-        {
-            
-        //     ++innerPtr;
+        {            
+             ++innerPtr;
 
-        //     if (std::equal_to<TCHAR>(_T(' '), *innerPtr))
-        //     {
-        //         m_error_messages.push_back(_T("error: ")); //TODO
-        //         return nullptr;
-        //     }
+            if (_T(' ') == *innerPtr)
+            {
+                m_error_messages.push_back(_T("error: ")); //TODO
+                return nullptr;
+            }
 
-        //     while (std::not_equal_to<TCHAR>(_T(' '), *innerPtr))
-        //     {
-        //         ++innerPtr;
-        //     }
-            
+            while (_T(' ') != *innerPtr)
+            {
+                ++innerPtr;
+            }            
         }
         
        return nullptr;

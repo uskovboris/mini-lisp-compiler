@@ -4,4 +4,4 @@ project (minilisp)
 # Sources
 add_subdirectory (src)
 
-add_executable (minilispm, ${SOURCE})
+add_executable (minilisp ${SOURCE})
