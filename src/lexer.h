@@ -6,6 +6,8 @@
 #include <cstring>
 #include <algorithm>
 
+#include <iostream>
+
 #include "options.h"
 
 namespace minilisp 
@@ -15,44 +17,53 @@ class lexer
 {
 public:
 
-    void tokinize_file(const TCHAR *content) 
+    void tokinize_file(const std::basic_string<TCHAR> content) 
     {
-        if (content)
-        {
-            TCHAR *currentPtr=tokinize_letter(content);
+        bool commentDetected = false;
+        bool stringLiteralDetected = false;
 
-            while (currentPtr)
+        for (const auto characterPtr: content)
+        {
+            while (characterPtr)
             {
-                currentPtr=tokinize_letter(currentPtr);
+                if (commentDetected)
+                {
+                    if (characterPtr != '\n')
+                    {
+                        continue;
+                    }
+
+                    commentDetected = false;
+                }
+
+                switch (characterPtr)
+                {
+                    case _T('('):
+                        m_tokens.push_back(_T("("));
+                        break;
+
+                    case _T(')'):
+                        m_tokens.push_back(_T(")"));
+                        break; 
+
+                    case _T(' '):
+                        // Just skip
+                        break;
+
+                    case _T(';'):
+                        commentDetected = true;
+                        break;
+                }
             }
+        }
+
+        for (const auto token: m_tokens)
+        {            
+            std::wcout << token << std::endl;
         }
     }
 
 private:
-
-    TCHAR *tokinize_letter(const TCHAR *character)
-    {        
-        //TODO Use strtok function
-        auto innerPtr = const_cast<TCHAR * >(character);
-        
-        if (!_T("(") == *character)
-        {            
-             ++innerPtr;
-
-            if (_T(' ') == *innerPtr)
-            {
-                m_error_messages.push_back(_T("error: ")); //TODO
-                return nullptr;
-            }
-
-            while (_T(' ') != *innerPtr)
-            {
-                ++innerPtr;
-            }            
-        }
-        
-       return nullptr;
-    }
 
     std::vector<std::basic_string<TCHAR> > m_tokens;
     std::vector<std::basic_string<TCHAR> > m_error_messages;
