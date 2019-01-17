@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+minilisp
 
 # CMake
 CMakeLists.txt.user
@@ -42,3 +43,8 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
+
+# Visual Studio
+*.sln
+*.vcxproj
+*.minilisp.vcxproj.filters
