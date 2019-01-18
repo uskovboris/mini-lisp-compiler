@@ -1,5 +1,7 @@
 #include "tokenizer.h"
 
+#include "options.h"
+
 namespace minilisp 
 {
 
@@ -47,14 +49,14 @@ void tokenizer::tokinize_file(const std::basic_string<TCHAR> content)
                 break;
 
             default:
-                currentToken.append(1, characterPtr);
+                currentToken.append(1, character);
                 break;
         }        
     }
 
     for (const auto token: m_tokens)
     {            
-        std::wcout << token << std::endl;
+        tcout << token << std::endl;
     }
 }
 

@@ -2,6 +2,7 @@ set(SOURCE
    ${SOURCE}
    ${CMAKE_CURRENT_SOURCE_DIR}/tokenizer.cpp
    ${CMAKE_CURRENT_SOURCE_DIR}/minilisp.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/interpreter.cpp
    PARENT_SCOPE
 )
 set(HEADERS
