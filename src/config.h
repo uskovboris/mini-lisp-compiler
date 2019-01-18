@@ -1,6 +1,8 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
+#include <iostream>
+
 #if !defined(_UNICODE)
 #   define _UNICODE
 #endif /* _UNICODE */
@@ -22,16 +24,16 @@
         typedef wchar_t TCHAR;
 
         /* IO streams */
-        typedef std::wcin  tcin;
-        typedef std::wcout tcout;
-        typedef std::wcerr tcerr;
+        #define std::wcin  tcin
+        #define std::wcout tcout
+        #define std::wcerr tcerr
 #   else
         typedef char TCHAR;
 
         /* IO streams */
-        typedef std::cin  tcin;
-        typedef std::cout tcout;
-        typedef std::cerr tcerr;
+        #define std::cin  tcin
+        #define std::cout tcout
+        #define std::cerr tcerr
 #   endif /* _UNICODE */
 #endif /* TCHAR */
 

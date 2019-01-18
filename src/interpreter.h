@@ -1,7 +1,7 @@
 #ifndef INTERPRETER_H
 #define INTERPRETER_H
 
-#include "options.h"
+#include "config.h"
 
 #if defined(INTERPRETER)
 

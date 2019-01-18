@@ -3,7 +3,7 @@
 #include <string>
 
 #include "tokenizer.h"
-#include "options.h"
+#include "config.h"
 
 #include "interpreter.h"
 

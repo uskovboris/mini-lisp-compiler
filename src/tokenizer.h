@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-#include "options.h"
+#include "config.h"
 
 namespace minilisp 
 {
