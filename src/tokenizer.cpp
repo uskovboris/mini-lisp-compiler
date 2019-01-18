@@ -8,39 +8,48 @@ void tokenizer::tokinize_file(const std::basic_string<TCHAR> content)
     bool commentDetected = false;
     bool stringLiteralDetected = false;
 
-    for (const auto characterPtr: content)
+    std::basic_string<TCHAR> currentToken;
+
+    for (const auto character: content)
     {
-        while (characterPtr)
+        if (commentDetected)
         {
-            if (commentDetected)
+            if (character != '\n')
             {
-                if (characterPtr != '\n')
-                {
-                    continue;
-                }
-
-                commentDetected = false;
+                continue;
             }
 
-            switch (characterPtr)
-            {
-                case _T('('):
-                    m_tokens.push_back(_T("("));
-                    break;
-
-                case _T(')'):
-                    m_tokens.push_back(_T(")"));
-                    break; 
-
-                case _T(' '):
-                    // Just skip
-                    break;
-
-                case _T(';'):
-                    commentDetected = true;
-                    break;
-            }
+            commentDetected = false;
         }
+
+        switch (character)
+        {
+            case _T('('):
+            case _T(')'):
+                m_tokens.push_back(std::basic_string<TCHAR>(1, character));
+                break;
+
+            case _T(' '):
+                if (!currentToken.empty())
+                {
+                    m_tokens.push_back(currentToken);
+                    currentToken.clear();
+                }
+                break;
+
+            case _T(';'):
+                if (!currentToken.empty())
+                {
+                    m_tokens.push_back(currentToken);
+                    currentToken.clear();
+                }
+                commentDetected = true;
+                break;
+
+            default:
+                currentToken.append(1, characterPtr);
+                break;
+        }        
     }
 
     for (const auto token: m_tokens)
